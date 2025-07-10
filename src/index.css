@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 100%;
+
+    --card: 215 29% 18%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 215 29% 18%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 266 89% 90%; /* Updated to light purple */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 29% 27%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215 29% 25%;
+    --muted-foreground: 0 0% 100%;
+
+    --accent: 266 89% 90%; /* Updated to light purple */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 29% 30%;
+    --input: 215 29% 30%;
+    --ring: 266 89% 90%; /* Updated to light purple */
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 215 33% 16%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 266 89% 90%; /* Updated to light purple */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 33% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 33% 22%;
+    --sidebar-ring: 266 89% 90%; /* Updated to light purple */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-vault font-ibm-plex text-white antialiased;
+  }
+  
+  /* Add thinner focus styles for all input elements */
+  input:focus, 
+  select:focus, 
+  textarea:focus, 
+  button:focus,
+  [data-radix-select-trigger]:focus-visible,
+  [data-state="open"] {
+    @apply outline-none ring-1 ring-purple-300/70 !border-purple-300/70;
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-lg transition-all duration-300;
+  }
+  
+  .glass-card {
+    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg shadow-lg relative overflow-hidden transition-all duration-300 hover:border-white/20;
+  }
+  
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  }
+  
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer::after {
+    @apply absolute top-0 left-0 w-full h-full;
+    content: '';
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite linear;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 bg-clip-text text-transparent;
+  }
+  
+  .btn-glow {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-glow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #3E96F4, #8B5CF6, #3E96F4);
+    background-size: 400%;
+    z-index: -1;
+    animation: glowing 20s linear infinite;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: inherit;
+  }
+  
+  .btn-glow:hover::before {
+    opacity: 0.7;
+  }
+
+  @keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+}
